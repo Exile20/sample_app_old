@@ -39,6 +39,7 @@ describe "POST 'create'" do
         flash.now[:error].should =~ /invalid/i
 end
 end
+end
 
  describe "with valid email and password" do
 
