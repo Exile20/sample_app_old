@@ -14,10 +14,14 @@ def index
   end
 
   def new
+		unless signed_in?
     @user = User.new
     @title = "Sign up"
+		else
+		flash[:notice] = "Already Logged in"
+		redirect_to root_path
   end
- 
+ 		end
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -47,10 +51,22 @@ def update
   end
 
 def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
-    redirect_to users_path
-  end
+
+user = User.find(params[:id])
+if current_user?(user)
+flash[:error] = "Error, Admin Can not delete themselves."
+else
+user.destroy
+flash[:success] = "User destroyed."
+end
+redirect_to users_path
+end
+
+##def destroy
+    ##User.find(params[:id]).destroy
+    ##flash[:success] = "User destroyed."
+    ##redirect_to users_path
+  ##end
 
 private
 
@@ -62,6 +78,7 @@ private
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
     end
+
 def admin_user
       redirect_to(root_path) unless current_user.admin?
     end

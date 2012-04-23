@@ -302,6 +302,13 @@ describe "DELETE 'destroy'" do
         test_sign_in(admin)
       end
 
+##it "should not delete admin" do
+##lambda do
+##delete :destroy, :id => admin
+##end.should_not change(User, :count).by(-1)
+##end
+ 
+
       it "should destroy the user" do
         lambda do
           delete :destroy, :id => @user
