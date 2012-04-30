@@ -20,10 +20,14 @@ describe "GET 'index'" do
         second = Factory(:user, :name => "Bob", :email => "another@example.com")
         third  = Factory(:user, :name => "Ben", :email => "another@example.net")
 
-        @users = [@user, second, third]
-        30.times do
-          @users << Factory(:user, :name => Factory.next(:name),
-                                   :email => Factory.next(:email))
+        #@users = [@user, second, third]
+
+        #30.times do
+          #@users << Factory(:user, :name => Factory.next(:name),
+                                   #:email => Factory.next(:email))
+         30.times do
+          Factory(:user, :name => Factory.next(:name),
+                         :email => Factory.next(:email))
         end
       end
 

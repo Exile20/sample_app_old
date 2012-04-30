@@ -57,6 +57,19 @@ describe "GET 'index'" do
         response.should have_selector("a", :href => "/users?page=2",
                                            :content => "Next")
       end
+
+      it "should paginate the microposts" do 
+        32.times do 
+        mp = Factory(:micropost, :user => @user, :content => "fooooo baaaar") 
+      end 
+       get :show, :id => @user 
+       response.should have_selector("div.pagination") 
+       response.should have_selector("span.disabled", :content => "Previous") 
+       response.should have_selector("a", :href => "/users/1?page=2", 
+       :content => "2") 
+       response.should have_selector("a", :href => "/users/1?page=2", 
+       :content => "Next") 
+      end
     end
   end
 
