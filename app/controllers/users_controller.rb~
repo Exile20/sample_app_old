@@ -51,11 +51,10 @@ def update
   end
 
 def destroy
-## Exercise 10.6.5 Modify the destroy action to prevent admin
-## users from destroying themselves.
+
 user = User.find(params[:id])
 if current_user?(user)
-flash[:error] = "Admin suicide warning: Can't delete yourself."
+flash[:error] = "Error, Admin Can not delete themselves."
 else
 user.destroy
 flash[:success] = "User destroyed."

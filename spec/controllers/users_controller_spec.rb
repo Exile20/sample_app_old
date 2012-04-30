@@ -20,10 +20,14 @@ describe "GET 'index'" do
         second = Factory(:user, :name => "Bob", :email => "another@example.com")
         third  = Factory(:user, :name => "Ben", :email => "another@example.net")
 
-        @users = [@user, second, third]
-        30.times do
-          @users << Factory(:user, :name => Factory.next(:name),
-                                   :email => Factory.next(:email))
+        #@users = [@user, second, third]
+
+        #30.times do
+          #@users << Factory(:user, :name => Factory.next(:name),
+                                   #:email => Factory.next(:email))
+         30.times do
+          Factory(:user, :name => Factory.next(:name),
+                         :email => Factory.next(:email))
         end
       end
 
@@ -85,6 +89,13 @@ describe "GET 'show'" do
     it "should have a profile image" do
       get :show, :id => @user
       response.should have_selector("h1>img", :class => "gravatar")
+    end
+    it "should show the user's microposts" do
+      mp1 = Factory(:micropost, :user => @user, :content => "Foo bar")
+      mp2 = Factory(:micropost, :user => @user, :content => "Baz quux")
+      get :show, :id => @user
+      response.should have_selector("span.content", :content => mp1.content)
+      response.should have_selector("span.content", :content => mp2.content)
     end
 
 describe "GET 'new'" do
