@@ -57,6 +57,7 @@ describe "GET 'help'" do
                           "Ruby on Rails Tutorial Sample App | Help")
     end
   end
+
 describe "for signed-in users" do 
 
 before(:each) do 
