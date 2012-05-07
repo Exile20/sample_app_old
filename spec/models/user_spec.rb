@@ -217,8 +217,8 @@ describe "status feed" do
       end
 
       it "should include the user's microposts" do
-        @user.feed.include?(@mp1)#.should be_true
-        @user.feed.include?(@mp2)#.should be_true
+        @user.feed.include?(@mp1)#.should be_true should be true
+        @user.feed.include?(@mp2)#.should be_true should be true
       end
 
       it "should not include a different user's microposts" do

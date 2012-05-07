@@ -63,11 +63,11 @@ end
 redirect_to users_path
 end
 
-##def destroy
+##def destroy destroy
     ##User.find(params[:id]).destroy
     ##flash[:success] = "User destroyed."
     ##redirect_to users_path
-  ##end
+  ##end end to end
 
 def following
     @title = "Following"
